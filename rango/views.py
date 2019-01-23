@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def about(request):
-    return HttpResponse("This is the about page.")
+    return render(request, 'rango\about.html')
 
 def index(request):
     context_dict = {'boldmessage' : "Crunchy, creamy, cookie, candy, cupcake!"}
