@@ -6,7 +6,9 @@ from rango.forms import CategoryForm
 from rango.forms import PageForm
 
 def about(request):
-    return render(request, 'rango\about.html')
+    print(request.method)
+    print(request.user)
+    return render(request, 'rango/about.html', {})
 
 def index(request):
 
@@ -44,7 +46,7 @@ def add_category(request):
 
     return render(request, 'rango/add_category.html', {'form': form})
 
-def app_page(request, category_name_slug):
+def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
@@ -53,7 +55,7 @@ def app_page(request, category_name_slug):
     form = PageForm()
     if request.method == 'POST':
         form = PageForm(request.POST)
-        if form,is_valid():
+        if form.is_valid():
             if category:
                 page = form.save(commit=False)
                 page.category = category
